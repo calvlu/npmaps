@@ -1,21 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>poverty rate choropleth</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { 
+		margin: 0; 
+		padding: 0; 
+	}
+	#map { 
+		position: absolute; 
+		top: 0; 
+		bottom: 0; 
+		width: 100%; 
+	}
+
+  /* Marker tweaks */
+
+.mapboxgl-popup {
+max-width: 400px;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiaW1hZGF2ZWxvcGVyIiwiYSI6ImNrZTdxZ3RiNjBydnYycXRmZm5vbzJnMm0ifQ.HvEjXY7eSD4PaQTL1Uhv6Q';
     var map = new mapboxgl.Map({
         container: 'map', // container id
-        style: 'mapbox://styles/imadaveloper/ckew482j30e5p19l08q0bytuj', // style URL
+        style: 'mapbox://styles/imadaveloper/ckf6n9rfk0g1m1aoak7t9st27', // style URL
         center: [-90.194329, 15.819034], // starting position [lng, lat]
         zoom: 7.2 // starting zoom
     });
+map.addControl(new mapboxgl.NavigationControl({
+	showCompass: false
+}));
 
 
 map.on('load', function() {
 
+  //map.fitBounds([[-92.3105, 13.6346,], [-88.1756, 17.8166]]);
 
   var popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false
   });
  
-  map.on('mouseenter', 'nppartners', function (e) {
+  map.on('mouseenter', 'npos', function (e) {
 // Change the cursor style as a UI indicator.
     map.getCanvas().style.cursor = 'pointer';
 /*
@@ -26,8 +65,7 @@ map.on('load', function() {
     //var coordinates = [e.features[0].properties.Longitude, e.features[0].properties.Latitude];
     var coordinates = e.features[0].geometry.coordinates.slice();
 
-    var npname = e.features[0].properties.Nonprofit;
-
+    var npname = e.features[0].properties.NPO;
  
 // Ensure that if the map is zoomed out such that multiple
 // copies of the feature are visible, the popup appears
@@ -39,11 +77,19 @@ map.on('load', function() {
  
 // Populate the popup and set its coordinates
 // based on the feature found.
-    popup.setLngLat(coordinates).setHTML('<h3>' + npname + '</h3><p>'+ 'insert descrip' +'</p>').addTo(map);
+    popup.setLngLat(coordinates).setHTML(npname).addTo(map);
   });
  
-  map.on('mouseleave', 'nppartners', function () {
+  map.on('mouseleave', 'npos', function () {
     map.getCanvas().style.cursor = '';
     popup.remove();
   });
+
+
+
 });
+</script>
+
+</body>
+</html>
+
