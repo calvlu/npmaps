@@ -17,19 +17,54 @@
 		bottom: 0; 
 		width: 100%; 
 	}
+	.np-map-buttons {
+  opacity: 0;
+  transition: opacity 0.3s;
+  font: 400 12px/1 nyt-franklin, helvetica, sans-serif;
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid #c1c1c1;
+  border-radius: 4px;
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 8px; }
+  @media screen and (min-width: 765px) {
+    .np-map-buttons {
+      font-size: 14px; } }
+  .np-map-buttons .np-map-btn {
+    border-right: 1px solid #c1c1c1;
+    padding: 6px 8px;
+    text-align: center;
+    cursor: pointer; }
+    @media screen and (min-width: 765px) {
+      .np-map-buttons .np-map-btn {
+        padding: 8px 13px; } }
+    .np-map-buttons .np-map-btn:last-child {
+      border-right: none; }
+    .np-map-buttons .np-map-btn:hover {
+    	background-color: #d4d4d4
+    }
+    .np-map-buttons .np-map-btn.eln-active {
+      font-weight: bold; }
 
   /* Marker tweaks */
 
-.mapboxgl-popup {
-max-width: 400px;
-font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
+  .mapboxgl-popup {
+    max-width: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
 
 
 </style>
 </head>
 <body>
 <div id="map"></div>
+<div class="np-map-buttons" style="opacity: 1;">
+		<div class="np-map-btn">Nonprofits</div>		
+		<div class="np-map-btn">Demographics</div>
+	</div>
 <script src="m1.js">
 </script>
 
