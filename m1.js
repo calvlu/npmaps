@@ -29,7 +29,13 @@ map.on('load', function() {
     'source-layer': 'nonprofitonetoone-clf0cp',
     'paint': {
       'circle-radius': 5,
-      'circle-opacity': 0.6,
+      'circle-opacity': [
+        'match', ['get', 'PioneroAffiliation'],
+        'P',
+        1,
+        /* other */
+        0.4
+      ],
       // color circles by partner status, using a match expression
       // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
       'circle-color': [
