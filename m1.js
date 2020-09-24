@@ -10,7 +10,7 @@ var map = new mapboxgl.Map({
   center: [-90.3900017126126, 15.6055893260292], // starting position [lng, lat]
   zoom: 3,
   maxBounds: bounds,
-  scrollZoom: false
+  //scrollZoom: false
 });
 map.addControl(new mapboxgl.NavigationControl({
   showCompass: false
@@ -45,6 +45,7 @@ map.on('load', function() {
     popup.remove();
 
     var coordinates = e.features[0].geometry.coordinates.slice();
+    flyToNonprofit(e.features[0]);
     var description = '<h3>' + e.features[0].properties.NPO + '</h3>' + 
       '<p>Pionero Affiliation: ' + e.features[0].properties.PioneroAffiliation + '</p>' +
       '<p>Year Founded: ' + e.features[0].properties.YearFounded + '</p>' +
@@ -101,10 +102,10 @@ map.on('load', function() {
     popup.remove();
   });
 
-  function flyToStore(currentFeature) {
+  function flyToNonprofit(currentFeature) {
     map.flyTo({
       center: currentFeature.geometry.coordinates,
-      zoom: 15
+      zoom: 10
     });
   }
 
