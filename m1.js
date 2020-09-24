@@ -108,13 +108,15 @@ map.on('load', function() {
     popup.remove();
   });
 
+
+
+
+
+});
+
   function flyToNonprofit(currentFeature) {
     map.flyTo({
       center: currentFeature.geometry.coordinates,
       zoom: 10
     });
   }
-
-
-
-});
