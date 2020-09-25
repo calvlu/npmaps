@@ -53,6 +53,7 @@ map.on('load', function() {
       ]
     }
   });
+
   map.on('click', 'npos', function(e) {
     popup.remove();
 
@@ -151,6 +152,55 @@ map.on('load', function() {
     popup.remove();
   });
 });
+
+let demoBtn = document.getElementById("choro");
+demoBtn.onclick = function() {
+  //if (map.getLayer('npos')) map.removeLayer('npos');
+  map.setLayoutProperty('npos', 'visibility', 'none');
+
+  if (map.getLayer('demos')) {
+    map.setLayoutProperty('demos', 'visibility', 'visible');
+  }
+  map.addSource('demographics', {
+    type: 'vector',
+    url: 'mapbox://imadaveloper.a8fix28r'
+  });
+
+  map.addLayer({
+    'id': 'demos',
+    'type': 'fill',
+    'source': 'demographics',
+    'source-layer': 'gtdeptdemos-6ac35m',
+    'paint': {
+      'fill-color': [
+        'step', ['get', 'Poverty Rate'],
+        '#dcdcef', 10,
+        '#c6c2ea', 20,
+        '#b1a8e2', 30,
+        '#9c8ed9', 40,
+        '#8776ce', 50,
+        '#725dc1', 60,
+        "#5c45b4", 70,
+        "#452da6", 80,
+        "#2a1297"
+      ],
+      'fill-opacity': 0.6
+    }
+  });
+
+  return false;
+}
+
+let nonprofBtn = document.getElementById("nonprof");
+
+nonprofBtn.onclick = function() {
+  map.setLayoutProperty('npos', 'visibility', 'visible');
+  if (map.getLayer('demos')) {
+    map.setLayoutProperty('demos', 'visibility', 'none');
+  }
+  return false;
+}
+
 
 function flyToNonprofit(currentFeature) {
   map.flyTo({
