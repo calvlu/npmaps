@@ -28,7 +28,13 @@ map.on('load', function() {
     'source': 'nonprofits',
     'source-layer': 'nonprofitonetoone-clf0cp',
     'paint': {
-      'circle-radius': 5,
+      'circle-radius': [
+        'match', ['get', 'PioneroAffiliation'],
+        'P',
+        6,
+        /* other */
+        5
+      ],
       'circle-opacity': [
         'match', ['get', 'PioneroAffiliation'],
         'P',
@@ -52,11 +58,48 @@ map.on('load', function() {
 
     var coordinates = e.features[0].geometry.coordinates.slice();
     flyToNonprofit(e.features[0]);
-    var description = '<h3>' + e.features[0].properties.NPO + '</h3>' + 
-      '<p>Pionero Affiliation: ' + e.features[0].properties.PioneroAffiliation + '</p>' +
+    let affiliation = '';
+    switch (e.features[0].properties.PioneroAffiliation) {
+      case 'P':
+        affiliation = 'Partner';
+        break;
+      case 'DP':
+        affiliation = 'Discontinued Partner';
+        break;
+      case 'E':
+        affiliation = 'Eligible';
+        break;
+      case 'NE':
+        affiliation = 'Not Eligible';
+
+    }
+    let gtreg = '';
+    switch (e.features[0].properties.GuateReg) {
+      case 'Asso':
+        gtreg = 'Association';
+        break;
+      case 'Found':
+        gtreg = 'Foundation';
+        break;
+      case 'NGO':
+        gtreg = 'Non-governmental organization';
+        break;
+      case 'N':
+        gtreg = 'Not Registered';
+
+    }
+    let gtgovfund = (e.features[0].properties.GuateGovtFunding == 'Y') ? 'Yes' : 'No';
+
+    var description = '<h3>' + e.features[0].properties.NPO + '</h3>' +
+      '<p>Pionero Affiliation: ' + affiliation + '</p>' +
+      '<p>Seal of Excellence: ' + e.features[0].properties.SealExcellence + '</p>' +
+      '<p>Total Evaluation Score: ' + e.features[0].properties.TotalEvalScore + '</p>' +
       '<p>Year Founded: ' + e.features[0].properties.YearFounded + '</p>' +
       '<p>Nonprofit Size: ' + e.features[0].properties.Size + '</p>' +
       '<p>Annual Budget: ' + e.features[0].properties.Budget + '</p>' +
+      '<p>Religious Affiliation: ' + e.features[0].properties.ReligiousAff + '</p>' +
+      '<p>Guatemala Registration: ' + gtreg + '</p>' +
+      '<p>Receives Government Funding: ' + gtgovfund + '</p>' +
       '<p>Tax Registration: ' + e.features[0].properties.USTaxStatus + '</p>';
     // Ensure that if the map is zoomed out such that multiple
     // copies of the feature are visible, the popup appears
@@ -107,16 +150,11 @@ map.on('load', function() {
     map.getCanvas().style.cursor = '';
     popup.remove();
   });
-
-
-
-
-
 });
 
-  function flyToNonprofit(currentFeature) {
-    map.flyTo({
-      center: currentFeature.geometry.coordinates,
-      zoom: 10
-    });
-  }
+function flyToNonprofit(currentFeature) {
+  map.flyTo({
+    center: currentFeature.geometry.coordinates,
+    zoom: 10
+  });
+}
