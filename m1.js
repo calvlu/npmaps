@@ -198,7 +198,8 @@ demoBtn.onclick = function() {
     // Change the cursor style as a UI indicator.
     map.getCanvas().style.cursor = 'pointer';
 
-    var description = e.features[0].properties.Department;
+    var description = '<h4>' + e.features[0].properties.Department + '</h4>' +
+      '<p>Poverty rate: ' + e.features[0].properties['Poverty Rate'] + '%</p>';
 
     // Populate the popup and set its coordinates
     // based on the feature found.
