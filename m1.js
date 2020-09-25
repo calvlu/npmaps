@@ -40,7 +40,7 @@ map.on('load', function() {
         'P',
         1,
         /* other */
-        0.4
+        0.15
       ],
       // color circles by partner status, using a match expression
       // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
