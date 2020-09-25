@@ -188,7 +188,27 @@ demoBtn.onclick = function() {
       'fill-outline-color': '#fff'
     }
   });
+  // Create a popup, but don't add it to the map yet.
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
 
+  map.on('mousemove', 'demos', function(e) {
+    // Change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = 'pointer';
+
+    var description = e.features[0].properties.Department;
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+  });
+
+  map.on('mouseleave', 'demos', function() {
+    map.getCanvas().style.cursor = '';
+    popup.remove();
+  });
   return false;
 }
 
