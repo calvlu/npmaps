@@ -184,7 +184,8 @@ demoBtn.onclick = function() {
         "#452da6", 80,
         "#2a1297"
       ],
-      'fill-opacity': 0.6
+      'fill-opacity': 0.6,
+      'fill-outline-color': '#fff'
     }
   });
 
