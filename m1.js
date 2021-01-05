@@ -40,8 +40,10 @@ map.on('load', function() {
         'P',
         1,
         /* other */
-        0.15
+        0.3
       ],
+      'circle-stroke-color': '#FFFFFF',
+      'circle-stroke-width': 0.5,
       // color circles by partner status, using a match expression
       // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
       'circle-color': [
@@ -92,16 +94,16 @@ map.on('load', function() {
     let gtgovfund = (e.features[0].properties.GuateGovtFunding == 'Y') ? 'Yes' : 'No';
 
     var description = '<h3>' + e.features[0].properties.NPO + '</h3>' +
-      '<p>Pionero Affiliation: ' + affiliation + '</p>' +
-      '<p>Seal of Excellence: ' + e.features[0].properties.SealExcellence + '</p>' +
-      '<p>Total Evaluation Score: ' + e.features[0].properties.TotalEvalScore + '</p>' +
-      '<p>Year Founded: ' + e.features[0].properties.YearFounded + '</p>' +
-      '<p>Nonprofit Size: ' + e.features[0].properties.Size + '</p>' +
-      '<p>Annual Budget: ' + e.features[0].properties.Budget + '</p>' +
-      '<p>Religious Affiliation: ' + e.features[0].properties.ReligiousAff + '</p>' +
-      '<p>Guatemala Registration: ' + gtreg + '</p>' +
-      '<p>Receives Government Funding: ' + gtgovfund + '</p>' +
-      '<p>Tax Registration: ' + e.features[0].properties.USTaxStatus + '</p>';
+      'Pionero Affiliation: ' + affiliation + '<br>' +
+      'Seal of Excellence: ' + e.features[0].properties.SealExcellence + '<br>' +
+      'Total Evaluation Score: ' + e.features[0].properties.TotalEvalScore + '<br>' +
+      'Year Founded: ' + e.features[0].properties.YearFounded + '<br>' +
+      'Nonprofit Size: ' + e.features[0].properties.Size + '<br>' +
+      'Annual Budget: ' + e.features[0].properties.Budget + '<br>' +
+      'Religious Affiliation: ' + e.features[0].properties.ReligiousAff + '<br>' +
+      'Guatemala Registration: ' + gtreg + '<br>' +
+      'Receives Government Funding: ' + gtgovfund + '<br>' +
+      'Tax Registration: ' + e.features[0].properties.USTaxStatus;
     // Ensure that if the map is zoomed out such that multiple
     // copies of the feature are visible, the popup appears
     // over the copy being pointed to.
