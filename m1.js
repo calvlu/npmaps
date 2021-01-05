@@ -6,7 +6,7 @@ var bounds = [
 ];
 var map = new mapboxgl.Map({
   container: 'map', // container id
-  style: 'mapbox://styles/mapbox/light-v10', // style URL
+  style: 'mapbox://styles/mapbox/dark-v10', // style URL
   center: [-90.3900017126126, 15.6055893260292], // starting position [lng, lat]
   zoom: 3,
   maxBounds: bounds,
@@ -40,10 +40,16 @@ map.on('load', function() {
         'P',
         1,
         /* other */
-        0.3
+        0.15
       ],
       'circle-stroke-color': '#FFFFFF',
-      'circle-stroke-width': 0.5,
+      'circle-stroke-width': [
+        'match', ['get', 'PioneroAffiliation'],
+        'P',
+        0.8,
+        /* other */
+        0
+      ],
       // color circles by partner status, using a match expression
       // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
       'circle-color': [
